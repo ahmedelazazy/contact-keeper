@@ -8,10 +8,10 @@ export default function ContactReducer(state, action) {
 			return { ...state, contacts: [...state.contacts, payload] };
 
 		case UPDATE_CONTACT:
-			return { ...state, contacts: state.contacts.map(c => (c.id === payload.id ? payload : c)) };
+			return { ...state, contacts: state.contacts.map(contact => (contact.id === payload.id ? payload : contact)) };
 
 		case DELETE_CONTACT:
-			return { ...state, contacts: state.contacts.filter(c => c.id !== payload) };
+			return { ...state, contacts: state.contacts.filter(contact => contact.id !== payload) };
 
 		case SET_CURRENT:
 			return { ...state, current: payload };
@@ -20,7 +20,10 @@ export default function ContactReducer(state, action) {
 			return { ...state, current: null };
 
 		case SET_FILTER:
-			return { ...state, filtered: state.contacts.filter(c => c.name.match(new RegExp(payload, 'gi'))) };
+			return {
+				...state,
+				filtered: state.contacts.filter(({ name }) => name.match(new RegExp(payload, 'gi'))),
+			};
 
 		case CLEAR_FILTER:
 			return { ...state, filtered: null };

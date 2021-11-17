@@ -39,7 +39,7 @@ export default function ContactForm() {
 
 	return (
 		<form onSubmit={onSubmit}>
-			<h2 class="text-left">{current ? 'Edit Contact' : 'Add Contact'}</h2>
+			<h2 className="text-left">{current ? 'Edit Contact' : 'Add Contact'}</h2>
 			<input type="text" name="name" placeholder="Name..." value={name} onChange={onChange} />
 			<input type="email" name="email" placeholder="Email..." value={email} onChange={onChange} />
 			<input type="text" name="phone" placeholder="Phone..." value={phone} onChange={onChange} />
