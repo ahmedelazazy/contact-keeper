@@ -6,6 +6,17 @@ export default function ContactForm() {
 
 	const { addContact, updateContact, current, clearCurrent } = contactContext;
 
+	const defaultValues = {
+		name: '',
+		email: '',
+		phone: '',
+		type: 'personal',
+	};
+
+	const [contact, setContact] = useState(defaultValues);
+
+	const { name, email, phone, type } = contact;
+
 	useEffect(() => {
 		if (current) {
 			setContact(current);
@@ -13,16 +24,6 @@ export default function ContactForm() {
 			setContact(defaultValues);
 		}
 	}, [current]);
-
-	const defaultValues = {
-		name: '',
-		email: '',
-		phone: '',
-		type: 'personal',
-	};
-	const [contact, setContact] = useState(defaultValues);
-
-	const { name, email, phone, type } = contact;
 
 	const onChange = e => setContact({ ...contact, [e.target.name]: e.target.value });
 

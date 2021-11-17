@@ -1,10 +1,10 @@
 import { useReducer } from 'react';
 import ContactReducer from './ContactReducer';
 import ContactContext from './contactContext';
-import { ADD_CONTACT, UPDATE_CONTACT, DELETE_CONTACT, SET_CURRENT, CLEAR_CURRENT } from '../types';
+import { ADD_CONTACT, UPDATE_CONTACT, DELETE_CONTACT, SET_CURRENT, CLEAR_CURRENT, SET_FILTER, CLEAR_FILTER } from '../types';
 import { v4 as uuid } from 'uuid';
 
-const ContactState = props => {
+export default function ContactState(props) {
 	const initialState = {
 		contacts: [
 			{
@@ -43,20 +43,25 @@ const ContactState = props => {
 
 	const clearCurrent = () => dispatch({ type: CLEAR_CURRENT });
 
+	const setFilter = text => dispatch({ type: SET_FILTER, payload: text });
+
+	const clearFilter = () => dispatch({ type: CLEAR_FILTER });
+
 	return (
 		<ContactContext.Provider
 			value={{
 				contacts: state.contacts,
 				current: state.current,
+				filtered: state.filtered,
 				addContact,
 				updateContact,
 				deleteContact,
 				setCurrent,
 				clearCurrent,
+				setFilter,
+				clearFilter,
 			}}>
 			{props.children}
 		</ContactContext.Provider>
 	);
-};
-
-export default ContactState;
+}
