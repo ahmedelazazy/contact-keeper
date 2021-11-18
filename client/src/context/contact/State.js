@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import ContactReducer from './ContactReducer';
-import ContactContext from './contactContext';
+import ContactReducer from './Reducer';
+import ContactContext from './Context';
 import { ADD_CONTACT, UPDATE_CONTACT, DELETE_CONTACT, SET_CURRENT, CLEAR_CURRENT, SET_FILTER, CLEAR_FILTER } from '../types';
 import { v4 as uuid } from 'uuid';
 

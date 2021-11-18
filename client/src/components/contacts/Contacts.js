@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import ContactContext from '../../context/contact/contactContext';
+import ContactContext from '../../context/contact/Context';
 import ContactFilter from './ContactFilter';
 import ContactItem from './ContactItem';
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ContactContext from '../../context/contact/contactContext';
+import ContactContext from '../../context/contact/Context';
 
 export default function ContactFilter() {
 	const [text, setText] = useState('');
@@ -18,7 +18,7 @@ export default function ContactFilter() {
 
 	return (
 		<form>
-			<input type="text" value={text} onChange={e => setText(e.target.value)} Placeholder="Filter Contacts..." />
+			<input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Filter Contacts..." />
 		</form>
 	);
 }
