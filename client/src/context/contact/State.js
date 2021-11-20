@@ -1,8 +1,9 @@
 import { useReducer } from 'react';
+import { v4 as uuid } from 'uuid';
+
 import ContactReducer from './Reducer';
 import ContactContext from './Context';
 import { ADD_CONTACT, UPDATE_CONTACT, DELETE_CONTACT, SET_CURRENT, CLEAR_CURRENT, SET_FILTER, CLEAR_FILTER } from '../types';
-import { v4 as uuid } from 'uuid';
 
 export default function ContactState(props) {
 	const initialState = {

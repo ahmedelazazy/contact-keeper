@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AlertContext from '../context/alert/Context';
+import AuthContext from '../context/auth/Context';
 
-export default function Login() {
+export default function Login(props) {
 	const alertContext = useContext(AlertContext);
+	const authContext = useContext(AuthContext);
 	const { setAlert } = alertContext;
+	const { login, error, clearErrors, isAuth } = authContext;
 
 	const [user, setUser] = useState({
 		email: '',
@@ -12,6 +15,16 @@ export default function Login() {
 
 	const { email, password } = user;
 
+	useEffect(() => {
+		if (error) {
+			setAlert({ type: 'danger', message: error });
+			clearErrors();
+		}
+		if (isAuth) {
+			props.history.push('/');
+		}
+	}, [error, isAuth]);
+
 	const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
 	const onSubmit = e => {
@@ -19,7 +32,7 @@ export default function Login() {
 		if (email === '' || password === '') {
 			setAlert({ message: 'All fields are required', type: 'danger' });
 		} else {
-			console.log(user);
+			login({ email, password });
 		}
 	};
 

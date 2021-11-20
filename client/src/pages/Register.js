@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AlertContext from '../context/alert/Context';
+import AuthContext from '../context/auth/Context';
 
-export default function Register() {
+export default function Register(props) {
 	const alertContext = useContext(AlertContext);
+	const authContext = useContext(AuthContext);
 	const { setAlert } = alertContext;
+	const { register, error, clearErrors, isAuth } = authContext;
 
 	const [user, setUser] = useState({
 		name: '',
@@ -14,6 +17,16 @@ export default function Register() {
 
 	const { name, email, password, password2 } = user;
 
+	useEffect(() => {
+		if (error) {
+			setAlert({ type: 'danger', message: error });
+			clearErrors();
+		}
+		if (isAuth) {
+			props.history.push('/');
+		}
+	}, [error, isAuth]);
+
 	const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
 	const onSubmit = e => {
@@ -23,7 +36,7 @@ export default function Register() {
 		} else if (password !== password2) {
 			setAlert({ message: "Confirm password doesn't match the password", type: 'danger' });
 		} else {
-			console.log(user);
+			register({ name, email, password });
 		}
 	};
 

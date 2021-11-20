@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import ContactContext from '../../context/contact/Context';
+import AuthContext from '../../context/auth/Context';
 import ContactFilter from './ContactFilter';
 import ContactItem from './ContactItem';
 
@@ -9,7 +10,14 @@ export default function Contacts() {
 	const contactContext = useContext(ContactContext);
 	const { contacts, filtered } = contactContext;
 
+	const authContext = useContext(AuthContext);
+	const { loadUser } = authContext;
+
 	const [displayedContacts, setDisplayedContacts] = useState(filtered || contacts);
+
+	useEffect(() => {
+		loadUser();
+	}, []);
 
 	useEffect(() => {
 		setDisplayedContacts(filtered || contacts);

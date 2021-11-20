@@ -10,6 +10,10 @@ import AuthState from './context/auth/State';
 import AlertState from './context/alert/State';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import { setAuthToken } from './config/axios';
+import PrivateRoute from './components/routing/PrivateRoute';
+
+setAuthToken(localStorage.getItem('token'));
 
 function App() {
 	return (
@@ -21,7 +25,7 @@ function App() {
 						<div className="container">
 							<Alerts />
 							<Switch>
-								<Route exact path="/" component={Home} />
+								<PrivateRoute exact path="/" component={Home} />
 								<Route exact path="/about" component={About} />
 								<Route exact path="/register" component={Register} />
 								<Route exact path="/login" component={Login} />
