@@ -4,7 +4,10 @@
 	"description": "Following along [Udemy Course: React Front To Back](https://www.udemy.com/course/modern-react-front-to-back/) by [Brad Traversy](https://github.com/bradtraversy)",
 	"scripts": {
 		"dev": "concurrently \"cd server && npm run start\" \" cd client && npm run start\" ",
-		"install-script": "concurrently \"cd server && npm install\" \" cd client && npm install\" "
+		"install-server": "cd server && npm install",
+		"install-client": "cd client && npm install && npm run build",
+		"build": "npm run install-server && npm run install-client",
+		"start": "cd server && npm run start"
 	},
 	"repository": {
 		"type": "git",
