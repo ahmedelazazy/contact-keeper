@@ -6,10 +6,10 @@ export default function ContactItem({ contact }) {
 	const contactContext = useContext(ContactContext);
 	const { deleteContact, setCurrent } = contactContext;
 
-	const { id, name, type, phone, email } = contact;
+	const { _id, name, type, phone, email } = contact;
 
 	const onDelete = () => {
-		deleteContact(id);
+		deleteContact(_id);
 	};
 
 	return (

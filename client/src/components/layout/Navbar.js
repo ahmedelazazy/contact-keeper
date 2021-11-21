@@ -1,10 +1,18 @@
 import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/Context';
+import ContactContext from '../../context/contact/Context';
 
 export default function Navbar() {
 	const authContext = useContext(AuthContext);
+	const contactContext = useContext(ContactContext);
 	const { isAuth, logout, user } = authContext;
+	const { clearContaxt } = contactContext;
+
+	const onLogout = () => {
+		logout();
+		clearContaxt();
+	};
 
 	return (
 		<div className="navbar bg-primary">
@@ -14,7 +22,7 @@ export default function Navbar() {
 					<Fragment>
 						{user?.name && <li>Welcome back, {user?.name}</li>}
 						<li>
-							<a onClick={logout} to="#!">
+							<a onClick={onLogout} to="#!">
 								Logout
 							</a>
 						</li>
